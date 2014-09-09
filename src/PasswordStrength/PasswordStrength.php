@@ -11,7 +11,6 @@
 
 namespace PasswordStrength;
 
-use Instantiator\Exception\InvalidArgumentException;
 use PasswordStrength\Enums\Preset;
 use PasswordStrength\Enums\Rule;
 
@@ -177,13 +176,13 @@ class PasswordStrength
   /**
    * @param bool $checkUsername
    *
-   * @throws \Instantiator\Exception\InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function setCheckUsername($checkUsername)
   {
     if(!is_bool($checkUsername))
     {
-      throw new InvalidArgumentException('checkUsername should be bool');
+      throw new \InvalidArgumentException('checkUsername should be bool');
     }
 
     $this->checkUsername = $checkUsername;
@@ -200,13 +199,13 @@ class PasswordStrength
   /**
    * @param bool $checkUsername
    *
-   * @throws \Instantiator\Exception\InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function setCheckEmail($checkEmail)
   {
     if(!is_bool($checkEmail))
     {
-      throw new InvalidArgumentException('checkEmail should be bool');
+      throw new \InvalidArgumentException('checkEmail should be bool');
     }
 
     $this->_checkUsername = $checkEmail;
@@ -300,7 +299,7 @@ class PasswordStrength
         $this->getMinSpecial();
       if($totalChars > $maxLength)
       {
-        throw new InvalidConfigException(
+        throw new \InvalidArgumentException(
           "Total number of required characters {$totalChars} is greater" .
           "than maximum allowed {$maxLength}. Validation is impossible!");
       }
@@ -311,11 +310,11 @@ class PasswordStrength
   {
     if(!is_int($number))
     {
-      throw new InvalidArgumentException($label . ' must be an integer');
+      throw new \InvalidArgumentException($label . ' must be an integer');
     }
     if(!is_null($min) && $number < $min)
     {
-      throw new InvalidArgumentException($label . ' must be at least ' . $min);
+      throw new \InvalidArgumentException($label . ' must be at least ' . $min);
     }
 
     return true;
