@@ -382,7 +382,14 @@ class PasswordStrength
         case Rule::RULE_MIN()->value():
           if(strlen($password) < $this->getMinLength())
           {
-            $this->addError($setup['msg']);
+            $this->addError(
+              $setup['msg'],
+              [
+                'n'      => $this->getMinLength(),
+                'found'  => strlen($password),
+                'plural' =>$this->getMinLength() == 1 ? '' : 's'
+              ]
+            );
           }
           break;
         case Rule::RULE_MAX()->value():
@@ -390,7 +397,14 @@ class PasswordStrength
             strlen($password) > $this->getMaxLength()
           )
           {
-            $this->addError($setup['msg']);
+            $this->addError(
+              $setup['msg'],
+              [
+                'n'      => $this->getMaxLength(),
+                'found'  => strlen($password),
+                'plural' =>$this->getMaxLength() == 1 ? '' : 's'
+              ]
+            );
           }
           break;
         case Rule::RULE_USER()->value():
